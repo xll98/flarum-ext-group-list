@@ -1,6 +1,7 @@
 {
     "name": "mircle/flarum-ext-group-list",
     "description": "List select groups and their members",
+    "version": "1.0.0",
     "keywords": [
         "flarum"
     ],
@@ -39,5 +40,7 @@
         "flagrow": {
             "discuss": "https://discuss.flarum.org/d/25386"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

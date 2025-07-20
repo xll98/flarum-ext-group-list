@@ -9,6 +9,9 @@
     },
     "scripts": {
         "dev": "webpack --mode development --watch",
-        "build": "webpack --mode production"
+        "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --mode production"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3"
     }
 }

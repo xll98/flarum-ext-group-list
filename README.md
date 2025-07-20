@@ -11,7 +11,9 @@ You can also automatically add a link in the sidebar, as well as show or hide ad
 
 ## Installation
 
-    composer require mircle/flarum-ext-group-list
+    composer require mircle/flarum-ext-group-list:"*"
+    composer update mircle/flarum-ext-group-list:"*"
+    php flarum cache:clear
 
 ## Support
 
