@@ -74,3 +74,183 @@
 .GroupList-description {
     margin-bottom: 20px;
 }
+
+// 申请功能样式
+.GroupList-apply {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.GroupApplicationModal {
+    .GroupApplicationModal-upload {
+        margin-bottom: 10px;
+    }
+
+    .GroupApplicationModal-fileInput {
+        display: none;
+    }
+
+    .GroupApplicationModal-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .GroupApplicationModal-image {
+        position: relative;
+        display: inline-block;
+
+        img {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 4px;
+        }
+
+        .GroupApplicationModal-removeImage {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+        }
+    }
+}
+
+.GroupApplicationListPage {
+    .GroupApplicationListPage-header {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .GroupApplicationListPage-empty {
+        text-align: center;
+        color: @muted-color;
+        font-style: italic;
+        padding: 40px;
+    }
+
+    .GroupApplicationListPage-list {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+.GroupApplicationItem {
+    background: @body-bg;
+    border: 1px solid @control-bg;
+    border-radius: @border-radius;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    &.GroupApplicationItem--pending {
+        border-left: 4px solid #f39c12;
+    }
+
+    &.GroupApplicationItem--approved {
+        border-left: 4px solid #27ae60;
+    }
+
+    &.GroupApplicationItem--rejected {
+        border-left: 4px solid #e74c3c;
+    }
+
+    .GroupApplicationItem-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid @control-bg;
+    }
+
+    .GroupApplicationItem-status {
+        font-weight: bold;
+        padding: 4px 8px;
+        border-radius: @border-radius;
+        font-size: 12px;
+
+        .GroupApplicationItem--pending & {
+            background: #f39c12;
+            color: white;
+        }
+
+        .GroupApplicationItem--approved & {
+            background: #27ae60;
+            color: white;
+        }
+
+        .GroupApplicationItem--rejected & {
+            background: #e74c3c;
+            color: white;
+        }
+    }
+
+    .GroupApplicationItem-content {
+        margin-bottom: 15px;
+    }
+
+    .GroupApplicationItem-text {
+        line-height: 1.6;
+    }
+
+    .GroupApplicationItem-meta {
+        font-size: 12px;
+        color: @muted-color;
+        margin-bottom: 10px;
+
+        span {
+            margin-right: 15px;
+        }
+    }
+
+    .GroupApplicationItem-review {
+        background: @control-bg;
+        padding: 10px;
+        border-radius: @border-radius;
+        margin-top: 10px;
+
+        .GroupApplicationItem-reviewComment {
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+    }
+
+    .GroupApplicationItem-actions {
+        margin-top: 15px;
+        text-align: right;
+    }
+}
+
+.GroupApplicationReviewModal {
+    .GroupApplicationReviewModal-info {
+        background: @control-bg;
+        padding: 10px;
+        border-radius: @border-radius;
+        margin-bottom: 15px;
+    }
+
+    .GroupApplicationReviewModal-content {
+        margin-bottom: 20px;
+
+        h4 {
+            margin-bottom: 10px;
+        }
+
+        .GroupApplicationReviewModal-applicationContent {
+            background: @body-bg;
+            border: 1px solid @control-bg;
+            padding: 15px;
+            border-radius: @border-radius;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    }
+}

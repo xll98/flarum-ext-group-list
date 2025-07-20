@@ -4,9 +4,48 @@ mircle-group-list:
       add: 添加用户组
     permissions:
       see: 查看组群一览
+      apply: 申请加入群组
+      review-applications: 审核群组申请
     settings:
       showAvatarBadges: 在头像上展示其他用户组徽章
       showOnlineStatus: 展示在线状态
       showSideNavLink: 添加侧边栏入口
   forum:
     nav: 组群一览
+    apply:
+      button: 申请加入
+      title: 申请加入 {group}
+      content_label: 申请内容
+      content_placeholder: 请详细说明您申请加入该群组的原因...
+      images_label: 上传图片
+      upload_images: 选择图片
+      submit: 提交申请
+      content_required: 请填写申请内容
+      success: 申请已提交，请等待管理员审核
+      error: 申请提交失败，请重试
+      upload_error: 图片上传失败
+    applications:
+      nav: 群组申请
+      title: 群组申请列表
+      empty: 暂无申请记录
+      applying_to: 申请加入
+      submitted_on: 提交时间：{date}
+      reviewed_by: 审核人：{reviewer}，审核时间：{date}
+      review_comment: 审核意见
+      review: 审核申请
+      status:
+        pending: 待审核
+        approved: 已批准
+        rejected: 已拒绝
+    review:
+      title: 审核群组申请
+      applicant_info: 用户 {user} 申请加入群组 {group}
+      application_content: 申请内容
+      status_label: 审核结果
+      status:
+        approved: 批准
+        rejected: 拒绝
+      comment_label: 审核意见
+      comment_placeholder: 请输入审核意见（可选）
+      success: 审核完成
+      error: 审核失败，请重试

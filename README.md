@@ -14,6 +14,7 @@ You can also automatically add a link in the sidebar, as well as show or hide ad
     composer require mircle/flarum-ext-group-list:"*"
     composer update mircle/flarum-ext-group-list:"*"
     php flarum cache:clear
+    php flarum migrate
 
 ## Support
 

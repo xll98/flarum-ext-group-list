@@ -19,18 +19,24 @@ return [
         ->get('/mircle-group-list', 'mircle-group-list.index', Controllers\GroupListController::class)
         ->post('/mircle-group-list-items', 'mircle-group-list.create', Controllers\ItemStoreController::class)
         ->patch('/mircle-group-list-items/{id:[0-9]+}', 'mircle-group-list.update', Controllers\ItemUpdateController::class)
-        ->delete('/mircle-group-list-items/{id:[0-9]+}', 'mircle-group-list.delete', Controllers\ItemDeleteController::class),
+        ->delete('/mircle-group-list-items/{id:[0-9]+}', 'mircle-group-list.delete', Controllers\ItemDeleteController::class)
+        ->get('/mircle-group-applications', 'mircle-group-applications.index', Controllers\GroupApplicationController::class)
+        ->post('/mircle-group-applications', 'mircle-group-applications.create', Controllers\GroupApplicationStoreController::class)
+        ->patch('/mircle-group-applications/{id:[0-9]+}/review', 'mircle-group-applications.review', Controllers\GroupApplicationReviewController::class),
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->attributes(function (ForumSerializer $serializer): array {
             /**
              * @var $settings SettingsRepositoryInterface
              */
             $settings = resolve(SettingsRepositoryInterface::class);
+            $actor = $serializer->getActor();
 
             return [
-                'mircle-group-list.showSideNavLink' => $settings->get('mircle-group-list.showSideNavLink') !== '0' && $serializer->getActor()->hasPermission('mircle-group-list.see'),
+                'mircle-group-list.showSideNavLink' => $settings->get('mircle-group-list.showSideNavLink') !== '0' && $actor->hasPermission('mircle-group-list.see'),
                 'mircle-group-list.showAvatarBadges' => $settings->get('mircle-group-list.showAvatarBadges') === '1',
                 'mircle-group-list.showOnlineStatus' => $settings->get('mircle-group-list.showOnlineStatus') === '1',
+                'canApplyToGroups' => $actor->hasPermission('mircle-group-list.apply'),
+                'canReviewApplications' => $actor->hasPermission('mircle-group-list.review-applications'),
             ];
         }),
 ];

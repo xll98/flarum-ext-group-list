@@ -14,5 +14,17 @@ app.initializers.add('mircle-group-list', () => {
             label: app.translator.trans('mircle-group-list.admin.permissions.see'),
             permission: 'mircle-group-list.see',
             allowGuest: true,
-        }, 'view');
+        }, 'view')
+        .registerPermission({
+            icon: 'fas fa-edit',
+            label: app.translator.trans('mircle-group-list.admin.permissions.apply'),
+            permission: 'mircle-group-list.apply',
+            allowGuest: false,
+        }, 'start')
+        .registerPermission({
+            icon: 'fas fa-clipboard-check',
+            label: app.translator.trans('mircle-group-list.admin.permissions.review-applications'),
+            permission: 'mircle-group-list.review-applications',
+            allowGuest: false,
+        }, 'moderate');
 });

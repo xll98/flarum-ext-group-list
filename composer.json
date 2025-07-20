@@ -1,14 +1,15 @@
 {
     "name": "mircle/flarum-ext-group-list",
     "description": "List select groups and their members",
-    "version": "1.0.0",
+    "version": "1.0.9",
     "keywords": [
         "flarum"
     ],
     "type": "flarum-extension",
     "license": "MIT",
     "require": {
-        "flarum/core": "^1.0"
+        "flarum/core": "^1.0",
+        "fof/upload": "^1.0"
     },
     "authors": [
         {
