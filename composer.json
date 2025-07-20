@@ -1,5 +1,5 @@
 {
-    "name": "clarkwinkelmann/flarum-ext-group-list",
+    "name": "mircle/flarum-ext-group-list",
     "description": "List select groups and their members",
     "keywords": [
         "flarum"
@@ -12,18 +12,18 @@
     "authors": [
         {
             "name": "Clark Winkelmann",
-            "homepage": "https://clarkwinkelmann.com/",
+            "homepage": "https://mircle.com/",
             "email": "clark.winkelmann@gmail.com",
             "role": "Developer"
         }
     ],
     "support": {
-        "source": "https://github.com/clarkwinkelmann/flarum-ext-group-list",
+        "source": "https://github.com/mircle/flarum-ext-group-list",
         "forum": "https://discuss.flarum.org/d/25386"
     },
     "autoload": {
         "psr-4": {
-            "ClarkWinkelmann\\GroupList\\": "src/"
+            "Mircle\\GroupList\\": "src/"
         }
     },
     "extra": {

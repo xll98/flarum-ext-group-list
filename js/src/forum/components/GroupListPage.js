@@ -15,7 +15,7 @@ export default class GroupListPage extends Page {
 
         app.request({
             method: 'GET',
-            url: app.forum.attribute('apiUrl') + '/clarkwinkelmann-group-list',
+            url: app.forum.attribute('apiUrl') + '/mircle-group-list',
         }).then(response => {
             this.items = app.store.pushPayload(response);
             m.redraw();

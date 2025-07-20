@@ -1,8 +1,8 @@
 <?php
 
-namespace ClarkWinkelmann\GroupList\Serializers;
+namespace Mircle\GroupList\Serializers;
 
-use ClarkWinkelmann\GroupList\GroupListItem;
+use Mircle\GroupList\GroupListItem;
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\GroupSerializer;
 use Flarum\Api\Serializer\UserSerializer;
@@ -11,7 +11,7 @@ use Tobscure\JsonApi\Relationship;
 
 class GroupListItemSerializer extends AbstractSerializer
 {
-    protected $type = 'clarkwinkelmann-group-list-items';
+    protected $type = 'mircle-group-list-items';
 
     /**
      * @param GroupListItem $item

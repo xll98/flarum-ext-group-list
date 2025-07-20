@@ -1,5 +1,5 @@
 {
-    "name": "@clarkwinkelmann/group-list",
+    "name": "@mircle/group-list",
     "private": true,
     "dependencies": {
         "flarum": "^0.1.0-beta.16",

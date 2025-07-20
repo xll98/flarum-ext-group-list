@@ -1,6 +1,6 @@
 <?php
 
-namespace ClarkWinkelmann\GroupList;
+namespace Mircle\GroupList;
 
 use Flarum\Database\AbstractModel;
 use Flarum\Group\Group;

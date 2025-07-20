@@ -18,7 +18,7 @@ export default class UserList {
                     this.badges(user, vnode.attrs.hideBadgeId),
                 ]),
                 m('.GroupList-UserList-user', [
-                    app.forum.attribute('clarkwinkelmann-group-list.showOnlineStatus') ? userOnline(user) : null,
+                    app.forum.attribute('mircle-group-list.showOnlineStatus') ? userOnline(user) : null,
                     username(user),
                 ]),
             ]));
@@ -26,7 +26,7 @@ export default class UserList {
     }
 
     badges(user, hideBadgeId) {
-        if (!app.forum.attribute('clarkwinkelmann-group-list.showAvatarBadges')) {
+        if (!app.forum.attribute('mircle-group-list.showAvatarBadges')) {
             return null;
         }
 

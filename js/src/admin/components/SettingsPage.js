@@ -4,8 +4,8 @@ import GroupListConfigurator from './GroupListConfigurator';
 
 /* global app, m */
 
-const settingsPrefix = 'clarkwinkelmann-group-list.';
-const translationPrefix = 'clarkwinkelmann-group-list.admin.settings.';
+const settingsPrefix = 'mircle-group-list.';
+const translationPrefix = 'mircle-group-list.admin.settings.';
 
 export default class SettingsPage extends ExtensionPage {
     content() {

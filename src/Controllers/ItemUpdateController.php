@@ -1,9 +1,9 @@
 <?php
 
-namespace ClarkWinkelmann\GroupList\Controllers;
+namespace Mircle\GroupList\Controllers;
 
-use ClarkWinkelmann\GroupList\GroupListItem;
-use ClarkWinkelmann\GroupList\Serializers\GroupListItemSerializer;
+use Mircle\GroupList\GroupListItem;
+use Mircle\GroupList\Serializers\GroupListItemSerializer;
 use Flarum\Api\Controller\AbstractShowController;
 use Flarum\Formatter\Formatter;
 use Flarum\Http\RequestUtil;

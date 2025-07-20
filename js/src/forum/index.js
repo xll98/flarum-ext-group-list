@@ -6,22 +6,22 @@ import GroupListItem from '../common/models/GroupListItem';
 
 /* global app */
 
-app.initializers.add('clarkwinkelmann-group-list', () => {
-    app.routes['clarkwinkelmann-group-list'] = {
+app.initializers.add('mircle-group-list', () => {
+    app.routes['mircle-group-list'] = {
         path: '/groups',
         component: GroupListPage,
     };
 
-    app.store.models['clarkwinkelmann-group-list-items'] = GroupListItem;
+    app.store.models['mircle-group-list-items'] = GroupListItem;
 
     extend(IndexPage.prototype, 'navItems', items => {
-        if (!app.forum.attribute('clarkwinkelmann-group-list.showSideNavLink')) {
+        if (!app.forum.attribute('mircle-group-list.showSideNavLink')) {
             return;
         }
 
-        items.add('clarkwinkelmann-group-list-item', LinkButton.component({
-            href: app.route('clarkwinkelmann-group-list'),
+        items.add('mircle-group-list-item', LinkButton.component({
+            href: app.route('mircle-group-list'),
             icon: 'fas fa-users',
-        }, app.translator.trans('clarkwinkelmann-group-list.forum.nav')), 85);
+        }, app.translator.trans('mircle-group-list.forum.nav')), 85);
     });
 });

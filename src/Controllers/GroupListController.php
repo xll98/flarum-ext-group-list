@@ -1,9 +1,9 @@
 <?php
 
-namespace ClarkWinkelmann\GroupList\Controllers;
+namespace Mircle\GroupList\Controllers;
 
-use ClarkWinkelmann\GroupList\GroupListItem;
-use ClarkWinkelmann\GroupList\Serializers\GroupListItemSerializer;
+use Mircle\GroupList\GroupListItem;
+use Mircle\GroupList\Serializers\GroupListItemSerializer;
 use Flarum\Api\Controller\AbstractListController;
 use Flarum\Http\RequestUtil;
 use Psr\Http\Message\ServerRequestInterface;
@@ -20,7 +20,7 @@ class GroupListController extends AbstractListController
 
     protected function data(ServerRequestInterface $request, Document $document)
     {
-        RequestUtil::getActor($request)->assertCan('clarkwinkelmann-group-list.see');
+        RequestUtil::getActor($request)->assertCan('mircle-group-list.see');
 
         $items = GroupListItem::query()->orderBy('order')->get();
 

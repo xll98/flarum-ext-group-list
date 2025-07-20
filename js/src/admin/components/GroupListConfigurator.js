@@ -6,7 +6,7 @@ import icon from 'flarum/common/helpers/icon';
 
 /* global app, m */
 
-const translationPrefix = 'clarkwinkelmann-group-list.admin.items.';
+const translationPrefix = 'mircle-group-list.admin.items.';
 
 export default class SelectFieldOptionEditor {
     oninit() {
@@ -14,7 +14,7 @@ export default class SelectFieldOptionEditor {
 
         app.request({
             method: 'GET',
-            url: app.forum.attribute('apiUrl') + '/clarkwinkelmann-group-list',
+            url: app.forum.attribute('apiUrl') + '/mircle-group-list',
         }).then(response => {
             this.items = app.store.pushPayload(response);
             m.redraw();
@@ -78,7 +78,7 @@ export default class SelectFieldOptionEditor {
                     onclick: () => {
                         app.request({
                             method: 'POST',
-                            url: app.forum.attribute('apiUrl') + '/clarkwinkelmann-group-list-items',
+                            url: app.forum.attribute('apiUrl') + '/mircle-group-list-items',
                             body: {
                                 data: {
                                     attributes: {

@@ -1,8 +1,8 @@
 <?php
 
-namespace ClarkWinkelmann\GroupList\Controllers;
+namespace Mircle\GroupList\Controllers;
 
-use ClarkWinkelmann\GroupList\GroupListItem;
+use Mircle\GroupList\GroupListItem;
 use Flarum\Api\Controller\AbstractDeleteController;
 use Flarum\Http\RequestUtil;
 use Illuminate\Support\Arr;
