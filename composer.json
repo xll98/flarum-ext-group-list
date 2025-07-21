@@ -1,7 +1,7 @@
 {
     "name": "mircle/flarum-ext-group-list",
     "description": "List select groups and their members",
-    "version": "1.0.9",
+    "version": "1.0.12",
     "keywords": [
         "flarum"
     ],

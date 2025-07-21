@@ -14,7 +14,7 @@ export default class GroupApplicationModal extends Modal {
         console.log('Group:', this.attrs.group);
         
         this.group = this.attrs.group;
-        this.content = Stream('');
+        //this.content = Stream('');
         this.uploadedFiles = [];
         this.loading = false;
     }
@@ -37,7 +37,7 @@ export default class GroupApplicationModal extends Modal {
         
         try {
             // 最简单的测试内容
-            const content = (
+            const content_test = (
                 <div className="Modal-body">
                     <h3>测试模态框内容</h3>
                     <p>如果您能看到这个内容，说明模态框正常工作</p>
@@ -54,8 +54,8 @@ export default class GroupApplicationModal extends Modal {
                 </div>
             );
             
-            console.log('Content created successfully:', content);
-            return content;
+            console.log('Content created successfully:', content_test);
+            return content_test;
         } catch (error) {
             console.error('Error in content method:', error);
             console.error('Error stack:', error.stack);
@@ -63,12 +63,12 @@ export default class GroupApplicationModal extends Modal {
         }
     }
 
-    view() {
-        console.log('GroupApplicationModal view called');
-        const result = super.view();
-        console.log('View result:', result);
-        return result;
-    }
+    // view() {
+    //     console.log('GroupApplicationModal view called');
+    //     const result = super.view();
+    //     console.log('View result:', result);
+    //     return result;
+    // }
 
     onsubmit(e) {
         e.preventDefault();

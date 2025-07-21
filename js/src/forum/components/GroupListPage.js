@@ -59,10 +59,10 @@ export default class GroupListPage extends Page {
                 Button.component({
                     className: 'Button Button--primary',
                     onclick: () => {
-                        console.log('Apply button clicked');
-                        console.log('Group:', item.group());
-                        console.log('Modal component:', GroupApplicationModal);
-                        console.log('App modal:', app.modal);
+                        //console.log('Apply button clicked');
+                        //console.log('Group:', item.group());
+                        //console.log('Modal component:', GroupApplicationModal);
+                        //console.log('App modal:', app.modal);
                         
                         try {
                             app.modal.show(GroupApplicationModal, {
@@ -79,10 +79,10 @@ export default class GroupListPage extends Page {
     }
 
     showApplyButton(group) {
-        console.log('showApplyButton called for group:', group);
-        console.log('canApplyToGroups:', app.forum.attribute('canApplyToGroups'));
-        console.log('user groups:', app.session.user.groups());
-        console.log('group id:', group.id());
+        //console.log('showApplyButton called for group:', group);
+        //console.log('canApplyToGroups:', app.forum.attribute('canApplyToGroups'));
+        //console.log('user groups:', app.session.user.groups());
+        //console.log('group id:', group.id());
         
         // 检查用户是否有权限申请，且不在该群组中
         const canApply = app.forum.attribute('canApplyToGroups') && 
