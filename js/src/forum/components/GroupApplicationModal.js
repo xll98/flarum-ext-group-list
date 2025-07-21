@@ -9,70 +9,136 @@ import withAttr from 'flarum/common/utils/withAttr';
 export default class GroupApplicationModal extends Modal {
     oninit(vnode) {
         super.oninit(vnode);
-        
-        console.log('GroupApplicationModal oninit called');
-        console.log('Group:', this.attrs.group);
-        
         this.group = this.attrs.group;
-        //this.content = Stream('');
-        this.uploadedFiles = [];
+        this.reason = Stream(''); // 申请理由
+        this.uploadedFiles = []; // 图片数组
         this.loading = false;
     }
 
     className() {
-        console.log('GroupApplicationModal className called');
         return 'GroupApplicationModal Modal--small';
     }
 
     title() {
-        console.log('GroupApplicationModal title called');
-        const title = app.translator.trans('mircle-group-list.forum.apply.title', { group: this.group.nameSingular() });
-        console.log('Modal title:', title);
-        return title;
+        return app.translator.trans('mircle-group-list.forum.apply.title', { group: this.group.nameSingular() });
     }
 
     content() {
-        console.log('GroupApplicationModal content called');
-        console.log('Creating simple test content...');
-        
-        try {
-            // 最简单的测试内容
-            const content_test = (
-                <div className="Modal-body">
-                    <h3>测试模态框内容</h3>
-                    <p>如果您能看到这个内容，说明模态框正常工作</p>
-                    <p>群组名称: {this.group.nameSingular()}</p>
-                    <button 
-                        className="Button Button--primary"
-                        onclick={() => {
-                            console.log('测试按钮被点击');
-                            this.hide();
-                        }}
-                    >
-                        关闭模态框
-                    </button>
+        return (
+            <div className="Modal-body">
+                <div className="Form">
+                    <div className="Form-group">
+                        <label>{app.translator.trans('mircle-group-list.forum.apply.content_label')}</label>
+                        <textarea
+                            className="FormControl"
+                            rows="4"
+                            placeholder={app.translator.trans('mircle-group-list.forum.apply.content_placeholder')}
+                            value={this.reason()}
+                            oninput={withAttr('value', this.reason)}
+                        />
+                    </div>
+                    <div className="Form-group">
+                        <label>{app.translator.trans('mircle-group-list.forum.apply.images_label')}</label>
+                        <input
+                            type="file"
+                            className="FormControl"
+                            multiple
+                            accept="image/*"
+                            onchange={this.uploadFiles.bind(this)}
+                        />
+                        <div className="helpText">
+                            {app.translator.trans('mircle-group-list.forum.apply.upload_images')}
+                        </div>
+                        {this.uploadedFiles.length > 0 && (
+                            <div style="margin-top:10px;">
+                                {this.uploadedFiles.map((file, idx) => (
+                                    <span style="display:inline-block;margin-right:8px;position:relative;" key={idx}>
+                                        <img src={file.url} style="max-width:80px;max-height:80px;border-radius:4px;" />
+                                        <span
+                                            style="position:absolute;top:0;right:0;background:#f44;color:#fff;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;cursor:pointer;font-size:12px;"
+                                            onclick={() => { this.removeImage(idx); }}
+                                        >×</span>
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <div className="Form-group">
+                        <Button
+                            className="Button Button--primary"
+                            type="submit"
+                            loading={this.loading}
+                            disabled={!this.reason().trim()}
+                        >
+                            {app.translator.trans('mircle-group-list.forum.apply.submit')}
+                        </Button>
+                    </div>
                 </div>
-            );
-            
-            console.log('Content created successfully:', content_test);
-            return content_test;
-        } catch (error) {
-            console.error('Error in content method:', error);
-            console.error('Error stack:', error.stack);
-            return <div className="Modal-body">Error: {error.message}</div>;
-        }
+            </div>
+        );
     }
 
-    // view() {
-    //     console.log('GroupApplicationModal view called');
-    //     const result = super.view();
-    //     console.log('View result:', result);
-    //     return result;
-    // }
+    uploadFiles(event) {
+        const files = Array.from(event.target.files);
+        files.forEach(file => {
+            const formData = new FormData();
+            formData.append('files[]', file);
+            app.request({
+                method: 'POST',
+                url: app.forum.attribute('apiUrl') + '/fof/upload',
+                body: formData,
+                headers: {
+                    'Authorization': 'Token ' + app.session.token,
+                },
+                serialize: raw => raw
+            }).then(response => {
+                this.uploadedFiles.push({
+                    url: response.data.attributes.url,
+                    name: file.name,
+                });
+                m.redraw();
+            }).catch(error => {
+                console.error('Upload failed:', error);
+                console.log('Upload response:', response);
+                app.alerts.show({ type: 'error' }, app.translator.trans('mircle-group-list.forum.apply.upload_error'));
+            });
+        });
+    }
+
+    removeImage(idx) {
+        this.uploadedFiles.splice(idx, 1);
+        m.redraw();
+    }
 
     onsubmit(e) {
         e.preventDefault();
-        console.log('onsubmit called');
-        this.hide();
+        if (this.loading) return;
+        if (!this.reason().trim()) {
+            app.alerts.show({ type: 'error' }, app.translator.trans('mircle-group-list.forum.apply.content_required'));
+            return;
+        }
+        this.loading = true;
+        const imagesHtml = this.uploadedFiles.map(file => `<img src="${file.url}" alt="img" style="max-width:200px;margin:5px;" />`).join('');
+        const fullContent = this.reason() + (imagesHtml ? '<br><br>' + imagesHtml : '');
+        app.request({
+            method: 'POST',
+            url: app.forum.attribute('apiUrl') + '/mircle-group-applications',
+            body: {
+                data: {
+                    type: 'mircle-group-applications',
+                    attributes: {
+                        groupId: this.group.id(),
+                        content: fullContent,
+                    },
+                },
+            },
+        }).then(() => {
+            this.loading = false;
+            app.alerts.show({ type: 'success' }, app.translator.trans('mircle-group-list.forum.apply.success'));
+            this.hide();
+        }).catch(() => {
+            this.loading = false;
+            app.alerts.show({ type: 'error' }, app.translator.trans('mircle-group-list.forum.apply.error'));
+        });
     }
 } 
