@@ -27,6 +27,9 @@ class GroupApplication extends AbstractModel
 {
     protected $table = 'mircle_group_applications';
 
+    // 明确启用自动时间戳
+    public $timestamps = true;
+
     protected $casts = [
         'reviewed_at' => 'datetime',
         'created_at' => 'datetime',

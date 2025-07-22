@@ -50,11 +50,6 @@ class GroupApplicationStoreController extends AbstractCreateController
         $application->content = $content;
         $application->status = 'pending';
         
-        // 明确设置时间戳
-        $now = now();
-        $application->created_at = $now;
-        $application->updated_at = $now;
-        
         // 确保审核相关字段为null
         $application->reviewed_by = null;
         $application->reviewed_at = null;
