@@ -40,7 +40,5 @@
         "flagrow": {
             "discuss": "https://discuss.flarum.org/d"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
