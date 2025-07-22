@@ -140,6 +140,7 @@ export default class GroupApplicationItem extends Component {
                         className: 'Button Button--primary',
                         onclick: () => app.modal.show(GroupApplicationReviewModal, {
                             application: application,
+                            includedData: this.attrs.includedData,
                             onUpdate: this.attrs.onUpdate
                         })
                     }, app.translator.trans('mircle-group-list.forum.applications.review'))

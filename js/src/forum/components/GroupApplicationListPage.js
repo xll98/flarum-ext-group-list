@@ -21,7 +21,13 @@ export default class GroupApplicationListPage extends Page {
         // 构建API URL，添加状态筛选参数
         let url = app.forum.attribute('apiUrl') + '/mircle-group-applications?include=user,group,reviewer';
         if (this.statusFilter !== 'all') {
-            url += '&filter[status]=' + this.statusFilter;
+            if (this.statusFilter === 'my') {
+                // 我的申请：筛选当前用户的申请
+                url += '&filter[user]=' + app.session.user.id();
+            } else {
+                // 状态筛选
+                url += '&filter[status]=' + this.statusFilter;
+            }
         }
 
         app.request({
@@ -64,6 +70,8 @@ export default class GroupApplicationListPage extends Page {
         let emptyText;
         if (this.statusFilter === 'all') {
             emptyText = isReviewer ? '暂无申请记录' : '您暂无申请记录';
+        } else if (this.statusFilter === 'my') {
+            emptyText = '您暂无申请记录';
         } else {
             const statusNames = {
                 'pending': '待审核',
@@ -110,6 +118,13 @@ export default class GroupApplicationListPage extends Page {
                             }, [
                                 m('i.fas.fa-times.GroupApplicationListPage-filterIcon'),
                                 m('span.GroupApplicationListPage-filterText', '已拒绝')
+                            ]),
+                            m('button.Button.GroupApplicationListPage-filterButton', {
+                                className: this.statusFilter === 'my' ? 'Button--primary' : '',
+                                onclick: () => this.onStatusFilterChange('my')
+                            }, [
+                                m('i.fas.fa-user.GroupApplicationListPage-filterIcon'),
+                                m('span.GroupApplicationListPage-filterText', '我的申请')
                             ])
                         ])
                     ])

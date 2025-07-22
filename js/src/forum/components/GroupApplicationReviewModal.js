@@ -24,12 +24,35 @@ export default class GroupApplicationReviewModal extends Modal {
     }
 
     content() {
-        // 使用Flarum store获取相关数据
+        // 使用传递的included数据获取相关数据
         const userRelation = this.application.relationships.user;
         const groupRelation = this.application.relationships.group;
+        const includedData = this.attrs.includedData || {};
         
-        const user = userRelation ? app.store.getById('users', userRelation.data.id) : null;
-        const group = groupRelation ? app.store.getById('groups', groupRelation.data.id) : null;
+        let user = null;
+        let group = null;
+        
+        // 从included数据中获取用户信息
+        if (userRelation && userRelation.data && includedData.users) {
+            const userData = includedData.users[userRelation.data.id];
+            if (userData) {
+                user = {
+                    id: userData.id,
+                    ...userData.attributes
+                };
+            }
+        }
+        
+        // 从included数据中获取群组信息
+        if (groupRelation && groupRelation.data && includedData.groups) {
+            const groupData = includedData.groups[groupRelation.data.id];
+            if (groupData) {
+                group = {
+                    id: groupData.id,
+                    ...groupData.attributes
+                };
+            }
+        }
         
         if (!user || !group) {
             return (
@@ -40,8 +63,8 @@ export default class GroupApplicationReviewModal extends Modal {
         }
         
         // 安全地获取显示名称
-        const userName = user.attribute('displayName') || user.attribute('username') || 'Unknown User';
-        const groupName = group.attribute('nameSingular') || 'Unknown Group';
+        const userName = user.displayName || user.username || 'Unknown User';
+        const groupName = group.nameSingular || 'Unknown Group';
         
         return (
             <div className="Modal-body">

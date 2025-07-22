@@ -39,6 +39,23 @@ class GroupApplicationController extends AbstractListController
                 $applications = $applications->where('status', $statusFilter);
             }
         }
+        
+        // 添加用户筛选
+        if (isset($filters['user'])) {
+            $userId = $filters['user'];
+            if (is_numeric($userId)) {
+                // 如果是管理员或有审核权限的用户，可以查看任何用户的申请
+                if ($actor->isAdmin() || $actor->hasPermission('mircle-group-list.review-applications')) {
+                    $applications = $applications->where('user_id', $userId);
+                } else {
+                    // 普通用户只能查看自己的申请
+                    if ($userId == $actor->id) {
+                        $applications = $applications->where('user_id', $userId);
+                    }
+                    // 如果尝试查看其他用户的申请，忽略此筛选
+                }
+            }
+        }
 
         $applications = $applications->orderBy('created_at', 'desc')->get();
 

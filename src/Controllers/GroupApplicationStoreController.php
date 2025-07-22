@@ -49,6 +49,17 @@ class GroupApplicationStoreController extends AbstractCreateController
         $application->group_id = $groupId;
         $application->content = $content;
         $application->status = 'pending';
+        
+        // 明确设置时间戳
+        $now = now();
+        $application->created_at = $now;
+        $application->updated_at = $now;
+        
+        // 确保审核相关字段为null
+        $application->reviewed_by = null;
+        $application->reviewed_at = null;
+        $application->review_comment = null;
+        
         $application->save();
 
         $application->load([
