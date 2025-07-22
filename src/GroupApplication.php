@@ -29,6 +29,8 @@ class GroupApplication extends AbstractModel
 
     protected $casts = [
         'reviewed_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user(): Relations\BelongsTo

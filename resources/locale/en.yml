@@ -27,12 +27,19 @@ mircle-group-list:
     applications:
       nav: 群组申请
       title: 群组申请列表
+      my_title: 我的群组申请
       empty: 暂无申请记录
+      my_empty: 您暂无申请记录
       applying_to: 申请加入
       submitted_on: 提交时间：{date}
       reviewed_by: 审核人：{reviewer}，审核时间：{date}
       review_comment: 审核意见
       review: 审核申请
+      data_error: 数据加载错误
+      incomplete_data: 申请数据不完整
+      missing_attributes: 缺少用户或群组属性
+      missing_application_attributes: 缺少申请属性
+      unknown_reviewer: 未知审核者
       status:
         pending: 待审核
         approved: 已批准
@@ -49,3 +56,4 @@ mircle-group-list:
       comment_placeholder: 请输入审核意见（可选）
       success: 审核完成
       error: 审核失败，请重试
+      submit: 提交审核

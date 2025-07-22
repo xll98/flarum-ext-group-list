@@ -24,17 +24,30 @@ export default class GroupApplicationReviewModal extends Modal {
     }
 
     content() {
-        const user = this.application.relationships.user.data;
-        const group = this.application.relationships.group.data;
+        // 使用Flarum store获取相关数据
+        const userRelation = this.application.relationships.user;
+        const groupRelation = this.application.relationships.group;
+        
+        const user = userRelation ? app.store.getById('users', userRelation.data.id) : null;
+        const group = groupRelation ? app.store.getById('groups', groupRelation.data.id) : null;
+        
+        if (!user || !group) {
+            return (
+                <div className="Modal-body">
+                    <p>数据加载错误，请刷新页面重试</p>
+                </div>
+            );
+        }
+        
+        // 安全地获取显示名称
+        const userName = user.attribute('displayName') || user.attribute('username') || 'Unknown User';
+        const groupName = group.attribute('nameSingular') || 'Unknown Group';
         
         return (
             <div className="Modal-body">
                 <div className="GroupApplicationReviewModal-info">
                     <p>
-                        {app.translator.trans('mircle-group-list.forum.review.applicant_info', {
-                            user: user.attributes.username,
-                            group: group.attributes.nameSingular
-                        })}
+                        用户 <strong>{userName}</strong> 申请加入群组 <strong>{groupName}</strong>
                     </p>
                 </div>
                 
@@ -59,11 +72,21 @@ export default class GroupApplicationReviewModal extends Modal {
                     <label>{app.translator.trans('mircle-group-list.forum.review.comment_label')}</label>
                     <textarea
                         className="FormControl"
-                        value={this.reviewComment()}
-                        oninput={withAttr('value', this.reviewComment)}
                         rows="3"
                         placeholder={app.translator.trans('mircle-group-list.forum.review.comment_placeholder')}
+                        value={this.reviewComment()}
+                        oninput={withAttr('value', this.reviewComment)}
                     />
+                </div>
+                
+                <div className="Form-group">
+                    <Button
+                        className="Button Button--primary"
+                        type="submit"
+                        loading={this.loading}
+                    >
+                        {app.translator.trans('mircle-group-list.forum.review.submit')}
+                    </Button>
                 </div>
             </div>
         );

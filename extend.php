@@ -10,7 +10,8 @@ return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__ . '/js/dist/forum.js')
         ->css(__DIR__ . '/resources/less/forum.less')
-        ->route('/groups', 'mircle-group-list'),
+        ->route('/groups', 'mircle-group-list')
+        ->route('/group-applications', 'mircle-group-applications'),
     (new Extend\Frontend('admin'))
         ->js(__DIR__ . '/js/dist/admin.js')
         ->css(__DIR__ . '/resources/less/admin.less'),
@@ -21,6 +22,7 @@ return [
         ->patch('/mircle-group-list-items/{id:[0-9]+}', 'mircle-group-list.update', Controllers\ItemUpdateController::class)
         ->delete('/mircle-group-list-items/{id:[0-9]+}', 'mircle-group-list.delete', Controllers\ItemDeleteController::class)
         ->get('/mircle-group-applications', 'mircle-group-applications.index', Controllers\GroupApplicationController::class)
+        ->get('/debug-group-applications', 'debug-group-applications.index', Controllers\DebugApplicationController::class)
         ->post('/mircle-group-applications', 'mircle-group-applications.create', Controllers\GroupApplicationStoreController::class)
         ->patch('/mircle-group-applications/{id:[0-9]+}/review', 'mircle-group-applications.review', Controllers\GroupApplicationReviewController::class),
     (new Extend\ApiSerializer(ForumSerializer::class))

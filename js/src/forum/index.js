@@ -33,8 +33,8 @@ app.initializers.add('mircle-group-list', () => {
             icon: 'fas fa-users',
         }, app.translator.trans('mircle-group-list.forum.nav')), 85);
         
-        // 添加申请列表链接（仅对管理员显示）
-        if (app.forum.attribute('canReviewApplications')) {
+        // 添加申请列表链接（对有申请权限或审核权限的用户显示）
+        if (app.forum.attribute('canApplyToGroups') || app.forum.attribute('canReviewApplications')) {
             items.add('mircle-group-applications-item', LinkButton.component({
                 href: app.route('mircle-group-applications'),
                 icon: 'fas fa-clipboard-list',

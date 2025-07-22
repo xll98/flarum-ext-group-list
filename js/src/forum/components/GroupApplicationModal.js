@@ -92,14 +92,16 @@ export default class GroupApplicationModal extends Modal {
                 },
                 serialize: raw => raw
             }).then(response => {
+                // 修复：响应数据是数组，需要访问第一个元素
+                const fileData = response.data[0];
                 this.uploadedFiles.push({
-                    url: response.data.attributes.url,
+                    url: fileData.attributes.url,
                     name: file.name,
                 });
                 m.redraw();
             }).catch(error => {
                 console.error('Upload failed:', error);
-                console.log('Upload response:', response);
+                // 修复：移除未定义的response引用
                 app.alerts.show({ type: 'error' }, app.translator.trans('mircle-group-list.forum.apply.upload_error'));
             });
         });

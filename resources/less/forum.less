@@ -126,15 +126,101 @@
 
 .GroupApplicationListPage {
     .GroupApplicationListPage-header {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         text-align: center;
+        
+        h1 {
+            margin-bottom: 15px;
+            
+            .GroupApplicationListPage-count {
+                font-size: 0.8em;
+                color: @muted-color;
+                font-weight: normal;
+            }
+        }
     }
-
+    
+    .GroupApplicationListPage-filters {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        
+        .GroupApplicationListPage-filterButtons {
+            display: flex;
+            gap: 8px;
+            background: @control-bg;
+            padding: 4px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+            .GroupApplicationListPage-filterButton {
+                position: relative;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                background: transparent;
+                color: @text-color;
+                font-size: 13px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                min-width: auto;
+                
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateY(-1px);
+                }
+                
+                &.Button--primary {
+                    background: @primary-color;
+                    color: #fff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+                    
+                    &:hover {
+                        background: darken(@primary-color, 5%);
+                        transform: translateY(-1px);
+                    }
+                }
+                
+                .GroupApplicationListPage-filterIcon {
+                    font-size: 12px;
+                    opacity: 0.8;
+                }
+                
+                .GroupApplicationListPage-filterText {
+                    white-space: nowrap;
+                }
+                
+                // 移动端适配
+                @media (max-width: 600px) {
+                    padding: 6px 12px;
+                    font-size: 12px;
+                    
+                    .GroupApplicationListPage-filterText {
+                        display: none;
+                    }
+                    
+                    .GroupApplicationListPage-filterIcon {
+                        margin: 0;
+                    }
+                    
+                    &:first-child .GroupApplicationListPage-filterText {
+                        display: inline; // "全部" 按钮在移动端也显示文字
+                    }
+                }
+            }
+        }
+    }
+    
     .GroupApplicationListPage-empty {
         text-align: center;
         color: @muted-color;
         font-style: italic;
-        padding: 40px;
+        padding: 40px 20px;
     }
 
     .GroupApplicationListPage-list {

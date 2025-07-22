@@ -25,10 +25,19 @@ class GroupApplicationController extends AbstractListController
         $actor = RequestUtil::getActor($request);
         
         // 管理员可以查看所有申请，普通用户只能查看自己的申请
-        if ($actor->hasPermission('mircle-group-list.review-applications')) {
+        if ($actor->isAdmin() || $actor->hasPermission('mircle-group-list.review-applications')) {
             $applications = GroupApplication::query();
         } else {
             $applications = GroupApplication::query()->where('user_id', $actor->id);
+        }
+
+        // 添加状态筛选
+        $filters = Arr::get($request->getQueryParams(), 'filter', []);
+        if (isset($filters['status'])) {
+            $statusFilter = $filters['status'];
+            if (in_array($statusFilter, ['pending', 'approved', 'rejected'])) {
+                $applications = $applications->where('status', $statusFilter);
+            }
         }
 
         $applications = $applications->orderBy('created_at', 'desc')->get();
