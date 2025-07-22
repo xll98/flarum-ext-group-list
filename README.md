@@ -102,7 +102,6 @@ php flarum cache:clear
 3. **审核功能无法使用**
    - 检查管理员是否有 `mircle-group-list.review-applications` 权限
 
-**Sponsors**: [Andrew MacLean](https://andrewdmaclean.com/), [GreXXL](https://www.flarumde.com/)
 
 ## Links
 
