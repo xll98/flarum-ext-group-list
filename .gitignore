@@ -1,7 +1,2 @@
 node_modules
 vendor
-composer.lock
-js/dist/admin.js.map
-js/dist/admin.js
-js/dist/forum.js
-js/dist/forum.js.map
