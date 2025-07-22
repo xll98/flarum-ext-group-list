@@ -13,15 +13,14 @@
     },
     "authors": [
         {
-            "name": "Clark Winkelmann",
-            "homepage": "https://mircle.com/",
-            "email": "clark.winkelmann@gmail.com",
+            "name": "Mircle xll",
+            "email": "xlrmicel@gmail.com",
             "role": "Developer"
         }
     ],
     "support": {
         "source": "https://github.com/mircle/flarum-ext-group-list",
-        "forum": "https://discuss.flarum.org/d/25386"
+        "forum": "https://discuss.flarum.org/d"
     },
     "autoload": {
         "psr-4": {
@@ -39,7 +38,7 @@
             }
         },
         "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/25386"
+            "discuss": "https://discuss.flarum.org/d"
         }
     },
     "minimum-stability": "dev",
