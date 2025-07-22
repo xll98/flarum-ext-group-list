@@ -19,7 +19,7 @@
         }
     ],
     "support": {
-        "source": "https://github.com/mircle/flarum-ext-group-list",
+        "source": "https://github.com/xll98/flarum-ext-group-list",
         "forum": "https://discuss.flarum.org/d"
     },
     "autoload": {
